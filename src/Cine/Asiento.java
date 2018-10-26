@@ -14,7 +14,14 @@ public class Asiento {
     private char fila;
     private byte columna;
     private boolean libre;
-
+    
+    
+    public Asiento(char fila, byte columna){
+        ;
+    }
+    public Asiento(){}
+    
+    
     public char getFila() {
         return fila;
     }

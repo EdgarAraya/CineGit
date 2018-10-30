@@ -17,7 +17,8 @@ public class Asiento {
     
     
     public Asiento(char fila, byte columna){
-        ;
+        this.fila=fila;
+        this.columna= columna;
     }
     public Asiento(){}
     
@@ -46,6 +47,14 @@ public class Asiento {
         this.libre = libre;
     }
     
+    public String mostrarDatos(){
+        String datos;
+        datos = new String();
+        
+        datos = datos.concat(""+Character.toUpperCase(this.getFila())+""+this.getColumna());
+        
+        return datos;
+    }
     
     
     

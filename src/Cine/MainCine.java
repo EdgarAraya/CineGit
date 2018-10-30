@@ -11,17 +11,23 @@ package Cine;
  */
 public class MainCine {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
+       Asiento testAsiento = new Asiento('a',(byte)3);
        
+        System.out.println(""+testAsiento.getFila());
+        System.out.println(""+testAsiento.getColumna());
+        System.out.println(""+testAsiento.mostrarDatos());
+       
+        
+        
+        
         
     }
     
-    public static boolean validaAsiento(Sala s, String a){
+   // public static boolean validaAsiento(Sala s, String a){
     
-    }
+    //}
     
     
 }

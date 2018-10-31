@@ -18,7 +18,33 @@ public class Sala {
     private Asiento[][] asientos;
     private short valorEntrada;
     private String nombre;
-
+    private static ArrayList<Character> nombreFilas;    
+    
+    public Sala(String nombre, byte totalFilas, byte totalColumnas, short valorEntrada){
+        this.nombre = nombre;
+        this.totalFilas= totalFilas;
+        this.totalColumnas = totalColumnas;
+        this.valorEntrada = valorEntrada;
+        
+        
+    }
+    
+    public short getValorEntrada() {
+        return valorEntrada;
+    }
+    
+    public void setValorEntrada(short valorEntrada) {
+        this.valorEntrada = valorEntrada;
+    }
+    
+    public String getNombre() {
+        return nombre;
+    }
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     public byte getTotalFilas() {
         return totalFilas;
     }
@@ -34,23 +60,39 @@ public class Sala {
     public void setTotalColumnas(byte totalColumnas) {
         this.totalColumnas = totalColumnas;
     }
-
-    public short getValorEntrada() {
-        return valorEntrada;
+    //D
+    public String mostrarOcupacion(int filaInicial, int filaFinal){
+        
     }
-
-    public void setValorEntrada(short valorEntrada) {
-        this.valorEntrada = valorEntrada;
+    
+    public String mostrarOcupacion(){
+        
     }
-
-    public String getNombre() {
-        return nombre;
+    
+    public byte totalAsientosLibres(){
+        
+        
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    
+    public ArrayList<Asiento> obtenerAsientosOcupados(){
+        
     }
-    private static ArrayList<Character> nombreFilas;
+    
+    public String mostrarDatos(){
+        
+    }
+    public boolean estaDisponible(Asiento a){
+        
+    }
+    public boolean ocuparAsiento(Asiento a){
+        
+    }
+    
+
+    
+
+    
+    
     
     
 }

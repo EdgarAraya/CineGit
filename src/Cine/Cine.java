@@ -14,25 +14,47 @@ import java.util.ArrayList;
 public class Cine {
     private ArrayList<Sala> salas;
     private String nombre;
+    
+    public Cine(String nombre){
+        this.nombre = nombre;
+        this.salas = new ArrayList();
+    }
 
     public ArrayList<Sala> getSalas() {
         return salas;
     }
-
-    public void setSalas(ArrayList<Sala> salas) {
-        this.salas = salas;
-    }
-
+    
     public String getNombre() {
         return nombre;
     }
-
+      
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    public Cine(String nombre){
-        ;
+    //D
+    public boolean agregarSala(Sala S){
+        
     }
+    
+    public boolean venderAsiento(Sala s, Asiento a){
+        
+    }
+    public String obtenerInformeRecaudacion(){
+        
+    }
+    public Sala buscarSalaPorNombre(String nombreSala){
+        
+        
+    }
+    
+    public String mostrarDatos(){
+        
+    }
+   
+  
+
+    
+    
+    
     
 }

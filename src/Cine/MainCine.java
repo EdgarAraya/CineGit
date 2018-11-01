@@ -14,14 +14,16 @@ public class MainCine {
     
     public static void main(String[] args) {
        Asiento testAsiento = new Asiento('a',(byte)3);
+       Sala sala = new Sala("test",(byte) 5, (byte) 5, (short) 1000);
+       
        
         System.out.println(""+testAsiento.getFila());
         System.out.println(""+testAsiento.getColumna());
         System.out.println(""+testAsiento.mostrarDatos());
        
+        System.out.println(""+testAsiento.isLibre());
         
-        
-        
+        System.out.println(""+sala.mostrarOcupacion());
         
     }
     

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Cine {
     private ArrayList<Sala> salas;
-    private String nombre;
+    private String nombre; //blabla
     
     public Cine(String nombre){
         this.nombre = nombre;

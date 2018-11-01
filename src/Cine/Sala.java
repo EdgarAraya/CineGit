@@ -26,6 +26,23 @@ public class Sala {
         this.totalColumnas = totalColumnas;
         this.valorEntrada = valorEntrada;
         
+        this.nombreFilas = new ArrayList();
+        
+        Asiento[][] asientos = new Asiento[totalFilas][totalColumnas];
+        
+        
+        for(int i = 0; i < this.totalFilas ; i++){
+            for (int j = 0; j < this.totalColumnas;j++){
+                Asiento asiento= new Asiento((char)('a'+i), ((byte) (j+1)));
+                asiento.setLibre(true);
+                asientos[i][j] = asiento;
+                System.out.println(""+asientos[i][j].mostrarDatos());
+                
+              // asientos[i][j]= new Asiento((char)('a'+i),(byte)j); 
+            }
+        }
+        
+        
         
     }
     
@@ -34,7 +51,9 @@ public class Sala {
     }
     
     public void setValorEntrada(short valorEntrada) {
-        this.valorEntrada = valorEntrada;
+        if (valorEntrada>=1000){
+            this.valorEntrada = valorEntrada;
+        }
     }
     
     public String getNombre() {
@@ -50,7 +69,9 @@ public class Sala {
     }
 
     public void setTotalFilas(byte totalFilas) {
-        this.totalFilas = totalFilas;
+        if (totalFilas>=3 && totalFilas<=15){
+            this.totalFilas = totalFilas;
+        }
     }
 
     public byte getTotalColumnas() {
@@ -58,7 +79,9 @@ public class Sala {
     }
 
     public void setTotalColumnas(byte totalColumnas) {
-        this.totalColumnas = totalColumnas;
+        if (totalColumnas>=5 && totalColumnas<=12){
+            this.totalColumnas = totalColumnas;
+        }
     }
     //D
     public String mostrarOcupacion(int filaInicial, int filaFinal){
@@ -66,7 +89,19 @@ public class Sala {
     }
     
     public String mostrarOcupacion(){
-        
+        String matriz;
+        matriz = new String();
+        System.out.println("test");
+        for (int i=0; i < this.totalFilas;i++){
+            System.out.println("test");
+            for(int j=0; j < this.totalColumnas;j++){
+                System.out.println("test");
+                matriz = matriz.concat(""+this.asientos[i][j].mostrarDatos());
+                System.out.println("test");
+                
+            }
+        }
+        return matriz;
     }
     
     public byte totalAsientosLibres(){
@@ -79,9 +114,12 @@ public class Sala {
     }
     
     public String mostrarDatos(){
+        String datos = new String();
         
     }
     public boolean estaDisponible(Asiento a){
+        
+        return (a.isLibre());
         
     }
     public boolean ocuparAsiento(Asiento a){

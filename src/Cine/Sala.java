@@ -25,25 +25,17 @@ public class Sala {
         this.totalFilas= totalFilas;
         this.totalColumnas = totalColumnas;
         this.valorEntrada = valorEntrada;
-        
         this.nombreFilas = new ArrayList();
-        
-        Asiento[][] asientos = new Asiento[totalFilas][totalColumnas];
+        this.asientos = new Asiento[totalFilas][totalColumnas];
         
         
         for(int i = 0; i < this.totalFilas ; i++){
             for (int j = 0; j < this.totalColumnas;j++){
                 Asiento asiento= new Asiento((char)('a'+i), ((byte) (j+1)));
-                asiento.setLibre(true);
                 asientos[i][j] = asiento;
-                System.out.println(""+asientos[i][j].mostrarDatos());
-                
               // asientos[i][j]= new Asiento((char)('a'+i),(byte)j); 
             }
-        }
-        
-        
-        
+        } 
     }
     
     public short getValorEntrada() {
@@ -91,15 +83,17 @@ public class Sala {
     public String mostrarOcupacion(){
         String matriz;
         matriz = new String();
-        System.out.println("test");
+        
         for (int i=0; i < this.totalFilas;i++){
-            System.out.println("test");
+            
             for(int j=0; j < this.totalColumnas;j++){
-                System.out.println("test");
-                matriz = matriz.concat(""+this.asientos[i][j].mostrarDatos());
-                System.out.println("test");
-                
+                if(this.asientos[i][j].isLibre()){
+                    matriz = matriz.concat("["+this.asientos[i][j].mostrarDatos()+"]  ");
+                } else {
+                    matriz = matriz.concat("["+"X "+"]  ");
+                }
             }
+            matriz = matriz.concat("\n");
         }
         return matriz;
     }

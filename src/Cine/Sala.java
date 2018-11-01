@@ -33,7 +33,8 @@ public class Sala {
             for (int j = 0; j < this.totalColumnas;j++){
                 Asiento asiento= new Asiento((char)('a'+i), ((byte) (j+1)));
                 asientos[i][j] = asiento;
-              // asientos[i][j]= new Asiento((char)('a'+i),(byte)j); 
+                
+              //asientos[i][j]= new Asiento((char)('a'+i),(byte) (j+1); 
             }
         } 
     }
@@ -77,15 +78,9 @@ public class Sala {
     }
     //D
     public String mostrarOcupacion(int filaInicial, int filaFinal){
-        
-    }
-    
-    public String mostrarOcupacion(){
         String matriz;
         matriz = new String();
-        
-        for (int i=0; i < this.totalFilas;i++){
-            
+        for (int i=filaInicial; i < filaFinal;i++){
             for(int j=0; j < this.totalColumnas;j++){
                 if(this.asientos[i][j].isLibre()){
                     matriz = matriz.concat("["+this.asientos[i][j].mostrarDatos()+"]  ");
@@ -96,28 +91,78 @@ public class Sala {
             matriz = matriz.concat("\n");
         }
         return matriz;
+        
+    }
+    
+    public String mostrarOcupacion(){
+        String matriz;
+        matriz = new String();
+        
+        for (int i=0; i < this.totalFilas;i++){
+            
+            for(int j=0; j < this.totalColumnas;j++){
+                if(this.estaDisponible(asientos[i][j])){
+                    matriz = matriz.concat("["+this.asientos[i][j].mostrarDatos()+"]  "+" "+asientos[i][j].isLibre());
+                } else {
+                    matriz = matriz.concat("["+"X "+"]  ");
+                }
+            }
+            matriz = matriz.concat("\n");
+        }
+        return matriz;
     }
     
     public byte totalAsientosLibres(){
-        
-        
+        byte libres=0;
+         for (int i=0; i < this.totalFilas;i++){
+            for(int j=0; j < this.totalColumnas;j++){
+                if(this.asientos[i][j].isLibre()){
+                    libres++;
+                }
+            }
+        }
+        return libres; 
     }
     
     public ArrayList<Asiento> obtenerAsientosOcupados(){
+        ArrayList<Asiento> ocupados = new ArrayList();
         
+        for(int i=0; i < this.totalFilas;i++){
+            for(int j=0;j < this.totalColumnas;j++){
+                if(!this.estaDisponible(asientos[i][j])){
+                    ocupados.add(asientos[i][j]);
+                }
+            }
+        }
+        return ocupados;
     }
     
     public String mostrarDatos(){
         String datos = new String();
         
+        datos= datos.concat("Sala: "+this.getNombre()+"\nValor Entrada: "+this.getValorEntrada());
+        return datos;
     }
     public boolean estaDisponible(Asiento a){
         
         return (a.isLibre());
         
     }
-    public boolean ocuparAsiento(Asiento a){
+    public boolean ocuparAsiento(Asiento a){//Fix later
         
+       
+
+        
+        if (a.isLibre()){
+            a.setLibre(false);
+            
+            
+            
+            
+            return true;
+        }else{
+            return false;
+        }
     }
     
 

@@ -17,8 +17,8 @@ public class Asiento {
     
     
     public Asiento(char fila, byte columna){
-        this.fila=fila;
-        this.columna= columna;
+        this.setFila(fila);
+        this.setColumna(columna);
         this.setLibre(true); //Testing inicializacion vacio
     }
     public Asiento(){}
@@ -29,6 +29,7 @@ public class Asiento {
     }
 
     public void setFila(char fila) {
+        fila=Character.toLowerCase(fila);
         this.fila = fila;
     }
 

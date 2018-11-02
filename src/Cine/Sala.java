@@ -104,7 +104,7 @@ public class Sala {
                 if(this.estaDisponible(asientos[i][j])){
                     matriz = matriz.concat("["+this.asientos[i][j].mostrarDatos()+"]  "+" "+asientos[i][j].isLibre());
                 } else {
-                    matriz = matriz.concat("["+"X "+"]  ");
+                    matriz = matriz.concat("["+"X "+"]  "+this.asientos[i][j].isLibre());
                 }
             }
             matriz = matriz.concat("\n");
@@ -144,8 +144,9 @@ public class Sala {
         return datos;
     }
     public boolean estaDisponible(Asiento a){
-        
-        return (a.isLibre());
+       int i = (int) (a.getFila()-'a');
+       int j = (int) (a.getColumna()-1);
+       return (asientos[i][j].isLibre());
         
     }
     public boolean ocuparAsiento(Asiento a){//Fix later
@@ -155,10 +156,8 @@ public class Sala {
        
        if (estaDisponible(asientos[i][j])){
             asientos[i][j].setLibre(false); 
-            return true;
-           
-       }
-       
+            return true; 
+       } 
        return false;
        
     }

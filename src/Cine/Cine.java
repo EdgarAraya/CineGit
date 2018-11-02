@@ -51,16 +51,21 @@ public class Cine {
     public String obtenerInformeRecaudacion(){
         String informe = new String();
         ArrayList<Integer> total = new ArrayList();
+        int totalRecaudado=0;
         int size ;
         
         for(Sala sala:salas){
             size= sala.obtenerAsientosOcupados().size();
             total.add(size*sala.getValorEntrada());
+            totalRecaudado+=size*sala.getValorEntrada();
         }
         informe = informe.concat("Sala\tRecaudado");
         for (int i =0; i < salas.size();i++){
             informe= informe.concat("\n"+salas.get(i).getNombre()+"\t"+total.get(i));
         }
+        
+        informe= informe.concat("\nTotal:\t"+totalRecaudado);
+        
         return informe;
     }
     

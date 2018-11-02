@@ -102,9 +102,9 @@ public class Sala {
             
             for(int j=0; j < this.totalColumnas;j++){
                 if(this.estaDisponible(asientos[i][j])){
-                    matriz = matriz.concat("["+this.asientos[i][j].mostrarDatos()+"]  "+" "+asientos[i][j].isLibre());
+                    matriz = matriz.concat("["+this.asientos[i][j].mostrarDatos()+"] ");
                 } else {
-                    matriz = matriz.concat("["+"X "+"]  "+this.asientos[i][j].isLibre());
+                    matriz = matriz.concat("["+"X "+"] ");
                 }
             }
             matriz = matriz.concat("\n");

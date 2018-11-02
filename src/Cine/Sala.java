@@ -140,7 +140,7 @@ public class Sala {
     public String mostrarDatos(){
         String datos = new String();
         
-        datos= datos.concat("Sala: "+this.getNombre()+"\nValor Entrada: "+this.getValorEntrada());
+        datos= datos.concat("Sala: "+this.getNombre()+"\nValor Entrada: ["+this.getValorEntrada()+"]");
         return datos;
     }
     public boolean estaDisponible(Asiento a){

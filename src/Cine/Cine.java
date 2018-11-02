@@ -79,13 +79,14 @@ public class Cine {
     public String mostrarDatos(){
         String datos = new String();
         
-        
-        
-        
+        for(Sala sala:salas){
+            datos= datos.concat("Cine: "+this.getNombre()+"\n");
+            datos= datos.concat(""+sala.mostrarDatos());
+            datos = datos.concat("\n"+sala.mostrarOcupacion()+"\n");
+  
+        }
         return datos;
-        
-        
-        
+  
     }
    
   

@@ -32,19 +32,6 @@ public class MainCine {
        sala.ocuparAsiento(testAsiento2);
        sala.ocuparAsiento(testAsiento3);
        //testAsiento.setLibre(false);
-       
-       
-        System.out.println(""+testAsiento.getFila());
-        System.out.println(""+testAsiento.getColumna());
-        System.out.println(""+testAsiento.mostrarDatos());
-       
-        System.out.println(""+testAsiento.isLibre());
-        
-        System.out.println(""+sala.mostrarOcupacion());
-        
-        System.out.println(""+sala.mostrarOcupacion(2, 5));
-        
-        System.out.println(""+sala.mostrarDatos());
         
         System.out.println("Libres:"+sala.totalAsientosLibres());
         
@@ -56,6 +43,8 @@ public class MainCine {
         
         System.out.println(""+sala.estaDisponible(testAsiento2));
         System.out.println(""+cine.obtenerInformeRecaudacion());
+        
+        System.out.println(""+cine.mostrarDatos());
     }
     
    // public static boolean validaAsiento(Sala s, String a){

@@ -150,19 +150,17 @@ public class Sala {
     }
     public boolean ocuparAsiento(Asiento a){//Fix later
         
+       int i = (int) (a.getFila()-'a');
+       int j = (int) (a.getColumna()-1);
        
-
-        
-        if (a.isLibre()){
-            a.setLibre(false);
-            
-            
-            
-            
+       if (estaDisponible(asientos[i][j])){
+            asientos[i][j].setLibre(false); 
             return true;
-        }else{
-            return false;
-        }
+           
+       }
+       
+       return false;
+       
     }
     
 

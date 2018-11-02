@@ -31,7 +31,7 @@ public class Cine {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    //D
+    /*
     public boolean agregarSala(Sala S){
         
     }
@@ -52,7 +52,7 @@ public class Cine {
     }
    
   
-
+*/
     
     
     

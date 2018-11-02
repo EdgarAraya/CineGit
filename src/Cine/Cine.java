@@ -40,16 +40,13 @@ public class Cine {
             } 
         }
         salas.add(s);
-        return true;
-        
-        
+        return true; 
     }
     
     public boolean venderAsiento(Sala s, Asiento a){
         
-        
-        return true;
-        
+        return s.ocuparAsiento(a);
+ 
     }
     public String obtenerInformeRecaudacion(){
         String informe = new String();
@@ -60,22 +57,22 @@ public class Cine {
             size= sala.obtenerAsientosOcupados().size();
             total.add(size*sala.getValorEntrada());
         }
-        
         informe = informe.concat("Sala\tRecaudado");
-        
         for (int i =0; i < salas.size();i++){
-   
             informe= informe.concat("\n"+salas.get(i).getNombre()+"\t"+total.get(i));
         }
         return informe;
-        
     }
-    /*
+    
     public Sala buscarSalaPorNombre(String nombreSala){
         
-        
+        for(Sala sala:salas){
+            if (sala.getNombre().equalsIgnoreCase(nombreSala)){
+                return sala;
+            }
+        }
+        return null;
     }
-    */
     public String mostrarDatos(){
         String datos = new String();
         
@@ -83,16 +80,7 @@ public class Cine {
             datos= datos.concat("Cine: "+this.getNombre()+"\n");
             datos= datos.concat(""+sala.mostrarDatos());
             datos = datos.concat("\n"+sala.mostrarOcupacion()+"\n");
-  
         }
         return datos;
-  
     }
-   
-  
-
-    
-    
-    
-    
 }

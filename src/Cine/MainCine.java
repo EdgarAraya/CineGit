@@ -21,6 +21,13 @@ public class MainCine {
        Sala sala = new Sala("test",(byte) 9, (byte) 9, (short) 1000);
        ArrayList<Asiento> ocupados= new ArrayList();
        
+       Cine cine = new Cine("test");
+       
+       cine.agregarSala(sala);
+       
+       
+       
+       
        sala.ocuparAsiento(testAsiento);
        sala.ocuparAsiento(testAsiento2);
        sala.ocuparAsiento(testAsiento3);
@@ -48,7 +55,7 @@ public class MainCine {
         }
         
         System.out.println(""+sala.estaDisponible(testAsiento2));
-        
+        System.out.println(""+cine.obtenerInformeRecaudacion());
     }
     
    // public static boolean validaAsiento(Sala s, String a){

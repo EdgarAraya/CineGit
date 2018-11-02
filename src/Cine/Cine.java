@@ -31,28 +31,65 @@ public class Cine {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    /*
-    public boolean agregarSala(Sala S){
+    
+    public boolean agregarSala(Sala s){//ver1
+        
+        for (Sala sala:salas){
+            if (sala.getNombre().equalsIgnoreCase(s.getNombre())){
+                return false;
+            } 
+        }
+        salas.add(s);
+        return true;
+        
         
     }
     
     public boolean venderAsiento(Sala s, Asiento a){
         
-    }
-    public String obtenerInformeRecaudacion(){
+        
+        return true;
         
     }
+    public String obtenerInformeRecaudacion(){
+        String informe = new String();
+        ArrayList<Integer> total = new ArrayList();
+        int size ;
+        
+        for(Sala sala:salas){
+            size= sala.obtenerAsientosOcupados().size();
+            total.add(size*sala.getValorEntrada());
+        }
+        
+        informe = informe.concat("Sala\tRecaudado");
+        
+        for (int i =0; i < salas.size();i++){
+   
+            informe= informe.concat("\n"+salas.get(i).getNombre()+"\t"+total.get(i));
+        }
+        return informe;
+        
+    }
+    /*
     public Sala buscarSalaPorNombre(String nombreSala){
         
         
     }
-    
+    */
     public String mostrarDatos(){
+        String datos = new String();
+        
+        
+        
+        
+        return datos;
+        
+        
         
     }
    
   
-*/
+
     
     
     

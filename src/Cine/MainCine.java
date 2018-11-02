@@ -37,14 +37,19 @@ public class MainCine {
         System.out.println("El cine se llama: "+cine.getNombre());
         
         
+        System.out.println(""+cine.mostrarDatos());
         
+        ventas(cine);
         
    
     }
     
-   // public static boolean validaAsiento(Sala s, String a){
+    public static boolean validaAsiento(Sala s, String a){
     
-    //}
+       // if (a.length)
+        
+        return true;
+    }
     
     public static Cine setupCine(){
         Scanner reader= new Scanner(System.in);
@@ -56,8 +61,6 @@ public class MainCine {
         int valorEntrada;
         int numeroFilas;
         int numeroColumnas;
-        
-        
         do {
             System.out.println("Ingrese nombre del cine:");
             nombreCine= reader.nextLine();
@@ -74,6 +77,7 @@ public class MainCine {
         
         
         for (int i = 0 ; i< numeroSalas;i++){
+            //Revisar restriccion de nombre en cuanto a mayuscula y minuscula
             do{
                 System.out.println("Ingrese nombre de sala "+(i+1));
                 nombreSala= reader.nextLine();
@@ -107,21 +111,51 @@ public class MainCine {
             
             sala = new Sala(nombreSala,(byte) numeroFilas,(byte) numeroColumnas,(short) valorEntrada);
             cine.agregarSala(sala);
-            
-            
-            
+   
         }
-        
-        
-        
-        
-        
-        
+
         return cine;
         
     }
     
-    
-    
+    public static void ventas(Cine cine){
+        Scanner reader= new Scanner(System.in);
+        String nombreSala = new String();
+        int numeroAsientos;
+        Sala sala;
+        do{
+            System.out.println("Salas disponibles:");
+            
+            for(Sala sal:cine.getSalas()){
+                System.out.println(""+sal.getNombre());  
+            }
+            
+            do{
+                System.out.print("Ingrese nombre de sala: ");
+                nombreSala= reader.nextLine();
+                
+            } while (nombreSala!=null && nombreSala.trim().isEmpty());
+            
+            sala =cine.buscarSalaPorNombre(nombreSala);
+ 
+        } while(sala==null);
+        
+        
+        System.out.print("Numero de asientos a comprar: ");
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+   
     
 }

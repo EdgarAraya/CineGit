@@ -45,10 +45,22 @@ public class MainCine {
     }
     
     public static boolean validaAsiento(Sala s, String a){
-    
-       // if (a.length)
+        int fila;
+        int columna;
+
+       if (a.length()==2 || a.length()==3 ){
+           
+           fila= (int) Character.toLowerCase(a.charAt(0))-'a';
+           columna= Integer.parseInt(a.substring(1));
+         
+           if (fila <s.getTotalFilas() && columna< s.getTotalColumnas()){
+               return true;
+  
+           }
+  
+       }
         
-        return true;
+        return false;
     }
     
     public static Cine setupCine(){
@@ -121,6 +133,7 @@ public class MainCine {
     public static void ventas(Cine cine){
         Scanner reader= new Scanner(System.in);
         String nombreSala = new String();
+        String answer= new String();
         int numeroAsientos;
         Sala sala;
         do{
@@ -140,22 +153,42 @@ public class MainCine {
  
         } while(sala==null);
         
+        do{
+            System.out.print("Numero de asientos a comprar: ");
+            numeroAsientos= Integer.parseInt(reader.nextLine());
         
-        System.out.print("Numero de asientos a comprar: ");
+        } while (numeroAsientos<=0);// agregar mas restricciones de limite superior
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        for (int i=0; i < numeroAsientos; i++){
+            
+            do{
+                System.out.println(""+sala.mostrarOcupacion());
+                System.out.println("Ingrese asiento a comprar");
+                answer= reader.nextLine();
+                if (!validaAsiento(sala,answer)) System.out.println("No valido");
+                
+            } while (!validaAsiento(sala,answer));
+            
+            
+            
+            
+        }
         
         
         
     }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
    
     
 }

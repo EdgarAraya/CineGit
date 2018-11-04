@@ -128,28 +128,36 @@ public class MainCine {
     }
     
     public static boolean validaAsiento(Sala s, String a){ //Revisar
+        Scanner reader= new Scanner(System.in);
         int fila;
+        char answer;
         int columna;
-
-       if (a.length()==2 || a.length()==3 ){
-           
-           fila= (int) Character.toLowerCase(a.charAt(0))-'a';
-           columna= Integer.parseInt(a.substring(1));
-           if (fila <s.getTotalFilas() && columna< s.getTotalColumnas()){
-               
-              // if (s.estaDisponible(s.asientos[fila][columna])){
-              //     ;
-              // }
-               
-               
-               return true;
-  
-           }
-  
-       }
         
-        return false;
-    }
+        Asiento asiento;
+        answer= Character.toLowerCase(a.charAt(0));
+        //if (!Character.isDigit(a.charAt(0)) &&)
+        
+        
+        fila = (int) (answer-'a');
+        columna = Integer.parseInt(a.substring(1));
+        
+        //asiento = new Asiento(numAChar(fila).charAt(0),(byte) columna);
+        
+        if (fila < s.getTotalFilas() && columna<s.getTotalColumnas()){
+            return true;
+        }
+        
+        
+               
+               
+               return false;
+  
+           
+  
+       
+        
+        
+}
     
     public static Cine setupCine(){
         Scanner reader= new Scanner(System.in);
@@ -173,28 +181,16 @@ public class MainCine {
         String answer= new String();
         int numeroAsientos;
         Sala sala;
-        do{
-            System.out.println("Salas disponibles:");
-            
-            for(Sala sal:cine.getSalas()){
-                System.out.println(""+sal.getNombre());  
-            }
-            
-            do{
-                System.out.print("Ingrese nombre de sala: ");
-                nombreSala= reader.nextLine();
-                
-            } while (nombreSala!=null && nombreSala.trim().isEmpty());
-            
-            sala =cine.buscarSalaPorNombre(nombreSala);
- 
-        } while(sala==null);
+        sala = salaActual(cine);
+        Asiento asiento;
+        //more work
+        
         
         do{
             System.out.print("Numero de asientos a comprar: ");
             numeroAsientos= Integer.parseInt(reader.nextLine());
         
-        } while (numeroAsientos<=0);// agregar mas restricciones de limite superior
+        } while (numeroAsientos<=0 && sala.obtenerAsientosOcupados().size()+numeroAsientos>127);// agregar mas restricciones de limite superior
         
         for (int i=0; i < numeroAsientos; i++){
             
@@ -206,9 +202,17 @@ public class MainCine {
                 
             } while (!validaAsiento(sala,answer));
             
+            char fila;
+            byte columna;
+            
+            fila = answer.charAt(0);
+            columna = (byte) Byte.parseByte(answer.substring(1));
             
             
+            asiento = new Asiento(fila, columna);
             
+            cine.venderAsiento(sala, asiento);
+ 
         }
         
         

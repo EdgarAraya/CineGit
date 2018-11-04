@@ -21,6 +21,7 @@ public class MainCine {
         int answer ;
         boolean exit = true;
         Cine cine= new Cine("Sin Nombre");
+        Sala test= new Sala("Test", (byte) 12,(byte)10, (short) 1000);
         Sala salaActual;
         
         System.out.println("El siguiente programa intenta emular un sistema de ventas de un cine.");
@@ -39,10 +40,10 @@ public class MainCine {
             System.out.println("6.Mostrar datos de cine");
             System.out.println("7.Agregar nueva sala");
             System.out.println("8.Salir del programa");
-            
+            System.out.println("Seleccione una opcion : ");
             answer = Integer.parseInt(reader.nextLine());
             boolean creado= (cine.getSalas().size()>0);
-            
+           
             switch (answer){
 
             case 1: 
@@ -98,6 +99,10 @@ public class MainCine {
             case 8:
                 exit= false;
                 break;
+                
+            case 9:
+                cine.agregarSala(test);
+                break;
             default:
                 System.out.println("Opcion invalida");
                 break;
@@ -149,13 +154,6 @@ public class MainCine {
     public static Cine setupCine(){
         Scanner reader= new Scanner(System.in);
         String nombreCine= new String();
-        String nombreSala= new String();
-        ArrayList<String> nombresSala= new ArrayList();
-        Sala sala;
-        int numeroSalas;
-        int valorEntrada;
-        int numeroFilas;
-        int numeroColumnas;
         do {
             System.out.println("Ingrese nombre del cine:");
             nombreCine= reader.nextLine();
@@ -169,7 +167,7 @@ public class MainCine {
         
     }
     
-    public static void ventas(Cine cine){
+    public static void ventas(Cine cine){//Work work
         Scanner reader= new Scanner(System.in);
         String nombreSala = new String();
         String answer= new String();
@@ -262,7 +260,7 @@ public class MainCine {
         for (int i = 0 ; i< numeroSalas;i++){
             //Revisar restriccion de nombre en cuanto a mayuscula y minuscula
             do{
-                System.out.println("Ingrese nombre de sala "+(i+1+cine.getSalas().size()));
+                System.out.println("Ingrese nombre de sala "+(1+cine.getSalas().size()));
                 nombreSala= reader.nextLine();
 
             }while(nombreSala!=null && nombreSala.trim().isEmpty() || nombresSala.contains(nombreSala));
@@ -309,21 +307,28 @@ public class MainCine {
         String answer = new String();
         int filaFinal;
         char fin;
-        int limiteFinal= sala.getTotalColumnas();
+        int limiteFinal= sala.getTotalColumnas()+1;
         
         
         do{
             do {
+                
+                System.out.println("Sala "+sala.getNombre()+" contiene "+sala.getTotalFilas()+" filas");
+                System.out.println("Desde A hasta "+numAChar((int)sala.getTotalFilas()));
                 System.out.println("Ingrese desde que fila mostrar:");
                 answer= reader.nextLine();
             } while (answer.length()!=1 || !Character.isLetter(answer.charAt(0)) );
             inicial = Character.toLowerCase(answer.charAt(0));
-            filaInicial= (int) (inicial -'a');
             
+            filaInicial= (int) (inicial -'a');
+
         } while(filaInicial>limiteFinal);
         
         do{
             do {
+                System.out.println("Sala "+sala.getNombre()+" contiene "+sala.getTotalFilas());
+                System.out.println("Fila inicial: "+Character.toUpperCase(inicial));
+                System.out.println("Es posible mostrar hasta la fila: "+numAChar((int)sala.getTotalFilas()));
                 System.out.println("Ingrese hasta que fila mostrar:");
                 answer= reader.nextLine();
             } while (answer.length()!=1 || !Character.isLetter(answer.charAt(0)) );
@@ -339,7 +344,9 @@ public class MainCine {
         
         
         
-        
+     public static String numAChar(int i) {
+        return (i > 0 && i < 27) ? String.valueOf((char)(i + 'A' - 1)) : null;
+}
         
         
         

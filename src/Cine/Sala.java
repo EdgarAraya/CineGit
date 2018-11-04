@@ -80,7 +80,7 @@ public class Sala {
     public String mostrarOcupacion(int filaInicial, int filaFinal){
         String matriz;
         matriz = new String();
-        for (int i=filaInicial; i < filaFinal;i++){
+        for (int i=filaInicial; i <= filaFinal;i++){
             for(int j=0; j < this.totalColumnas;j++){
                 if(this.asientos[i][j].isLibre()){
                     matriz = matriz.concat("["+this.asientos[i][j].mostrarDatos()+"]  ");

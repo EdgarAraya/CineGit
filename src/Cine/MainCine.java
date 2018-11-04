@@ -51,25 +51,29 @@ public class MainCine {
             case 2:
                 if (creado){
                     ventas(cine);
-                    break;
+
                 }
                 else{
                     System.out.println("Error");
-                    break;
                 }
+                break;
             case 3:
                 if (creado){
                     salaActual =salaActual(cine);
                     System.out.println(""+salaActual.mostrarDatos());
                     System.out.println(""+salaActual.mostrarOcupacion());
-                    break;
                 } else{
-                    System.out.println("Error");
-                    break;
+                    System.out.println("Error: No existe cine");
+
                 }
+                    break;
             case 4:
-                salaActual= salaActual(cine);
-                
+                if(creado){
+                    salaActual= salaActual(cine);
+                    System.out.println(""+salaRangoFilas(salaActual)); 
+                } else{
+                    System.out.println("Error: No existe cine.");
+                }
                 
                 break;
             case 5:
@@ -81,21 +85,22 @@ public class MainCine {
             case 7:
                 if (creado && cine.getSalas().size()<9){
                     agregarSalaCine(cine);
-                    break;
+                  
                 }else if(!creado ){
                     System.out.println("Error: No existe cine al que agregar salas");
-                    break;
+                   
                 } else{
                     System.out.println("Error: El cine ya tiene el numero maximo de salas");
-                    break;
+                   
                     
                 }
+                break;
             case 8:
                 exit= false;
                 break;
             default:
                 System.out.println("Opcion invalida");
-                
+                break;
                 
             }
         }
@@ -292,16 +297,45 @@ public class MainCine {
    
         }
         
-        
-        
-        
-        
-        
-        
-        
+         
     }
         
+    public static String salaRangoFilas(Sala sala){
+         
+        Scanner reader = new Scanner(System.in);
         
+        int filaInicial;
+        char inicial;
+        String answer = new String();
+        int filaFinal;
+        char fin;
+        int limiteFinal= sala.getTotalColumnas();
+        
+        
+        do{
+            do {
+                System.out.println("Ingrese desde que fila mostrar:");
+                answer= reader.nextLine();
+            } while (answer.length()!=1 || !Character.isLetter(answer.charAt(0)) );
+            inicial = Character.toLowerCase(answer.charAt(0));
+            filaInicial= (int) (inicial -'a');
+            
+        } while(filaInicial>limiteFinal);
+        
+        do{
+            do {
+                System.out.println("Ingrese hasta que fila mostrar:");
+                answer= reader.nextLine();
+            } while (answer.length()!=1 || !Character.isLetter(answer.charAt(0)) );
+            fin = Character.toLowerCase(answer.charAt(0));
+            filaFinal= (int) (fin -'a');
+            
+        } while(filaFinal>limiteFinal || filaFinal<filaInicial);
+        
+
+        return sala.mostrarOcupacion(filaInicial, filaFinal);
+         
+     }   
         
         
         

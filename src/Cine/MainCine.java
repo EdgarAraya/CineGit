@@ -17,22 +17,95 @@ public class MainCine {
     
     public static void main(String[] args) {
       
+        Scanner reader = new Scanner(System.in);
+        int answer ;
+        boolean exit = true;
         Cine cine= new Cine("Sin Nombre");
+        Sala salaActual;
         
         System.out.println("El siguiente programa intenta emular un sistema de ventas de un cine.");
         
         
         
         
-        System.out.println("1.Crear cine");
-        System.out.println("2.Vender entradas");
-        System.out.println("3.Ver ocupacion de sala");
-        System.out.println("4.Ver ocupacion de sala por rango de filas");
-        System.out.println("5.Obtener informe de recaudacion");
-        System.out.println("6.Mostrar datos de cine");
-        System.out.println("7.Agregar nueva sala");
-        System.out.println("9.Salir del programa");
+       
         
+        while (exit){
+            System.out.println("1.Crear cine");
+            System.out.println("2.Vender entradas");
+            System.out.println("3.Ver ocupacion de sala");
+            System.out.println("4.Ver ocupacion de sala por rango de filas");
+            System.out.println("5.Obtener informe de recaudacion");
+            System.out.println("6.Mostrar datos de cine");
+            System.out.println("7.Agregar nueva sala");
+            System.out.println("8.Salir del programa");
+            
+            answer = Integer.parseInt(reader.nextLine());
+            boolean creado= (cine.getSalas().size()>0);
+            
+            switch (answer){
+
+            case 1: 
+                cine = setupCine();
+                break;
+            case 2:
+                if (creado){
+                    ventas(cine);
+                    break;
+                }
+                else{
+                    System.out.println("Error");
+                    break;
+                }
+            case 3:
+                if (creado){
+                    salaActual =salaActual(cine);
+                    System.out.println(""+salaActual.mostrarDatos());
+                    System.out.println(""+salaActual.mostrarOcupacion());
+                    break;
+                } else{
+                    System.out.println("Error");
+                    break;
+                }
+            case 4:
+                salaActual= salaActual(cine);
+                
+                
+                break;
+            case 5:
+                System.out.println(""+cine.obtenerInformeRecaudacion());
+                break;
+            case 6:
+                System.out.println(""+cine.mostrarDatos());
+                break;
+            case 7:
+                if (creado && cine.getSalas().size()<9){
+                    agregarSalaCine(cine);
+                    break;
+                }else if(!creado ){
+                    System.out.println("Error: No existe cine al que agregar salas");
+                    break;
+                } else{
+                    System.out.println("Error: El cine ya tiene el numero maximo de salas");
+                    break;
+                    
+                }
+            case 8:
+                exit= false;
+                break;
+            default:
+                System.out.println("Opcion invalida");
+                
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        /*
         cine = setupCine();
         System.out.println("El cine se llama: "+cine.getNombre());
         
@@ -40,11 +113,11 @@ public class MainCine {
         System.out.println(""+cine.mostrarDatos());
         
         ventas(cine);
-        
+        */
    
     }
     
-    public static boolean validaAsiento(Sala s, String a){
+    public static boolean validaAsiento(Sala s, String a){ //Revisar
         int fila;
         int columna;
 
@@ -52,8 +125,13 @@ public class MainCine {
            
            fila= (int) Character.toLowerCase(a.charAt(0))-'a';
            columna= Integer.parseInt(a.substring(1));
-         
            if (fila <s.getTotalFilas() && columna< s.getTotalColumnas()){
+               
+              // if (s.estaDisponible(s.asientos[fila][columna])){
+              //     ;
+              // }
+               
+               
                return true;
   
            }
@@ -81,51 +159,7 @@ public class MainCine {
          
         Cine cine = new Cine(nombreCine);
         
-        do{
-            System.out.println("El numero maximo de salas que puede tener el cine es 9.");
-            System.out.println("Ingrese numero de salas del cine:");
-            numeroSalas= Integer.parseInt(reader.nextLine());
-        } while(numeroSalas<=0 || numeroSalas>10);
-        
-        
-        for (int i = 0 ; i< numeroSalas;i++){
-            //Revisar restriccion de nombre en cuanto a mayuscula y minuscula
-            do{
-                System.out.println("Ingrese nombre de sala "+(i+1));
-                nombreSala= reader.nextLine();
-
-            }while(nombreSala!=null && nombreSala.trim().isEmpty() || nombresSala.contains(nombreSala));
-        
-            nombresSala.add(nombreSala); 
-            do {
-                System.out.println("Ingrese valor de entrada de sala "+nombreSala);
-                valorEntrada= Integer.parseInt(reader.nextLine());
-            }while(valorEntrada<1000 || valorEntrada >32767);
-            
-            do{
-                System.out.println("Ingrese numero de filas de la sala "+nombreSala);
-                numeroFilas= Integer.parseInt(reader.nextLine());
-            } while(numeroFilas<3 || numeroFilas>15);
-            
-            do{
-                System.out.println("Advertencia: Debido a especificaciones del diseno del programa,");
-                System.out.println("la cantidad de asientos no puede superar 127 (valor maximo de byte),");
-                System.out.println("por lo que dado el numero actual de filas, SE RECOMIENDA como");
-                System.out.print("valor maximo de columnas : ");
-                if (127/numeroFilas>15){
-                    System.out.print("15");
-                }else{
-                    System.out.print((int)(127/numeroFilas));
-                }
-                System.out.println("\nIngrese numero de columnas de la sala "+nombreSala);
-                numeroColumnas=Integer.parseInt(reader.nextLine());
-            }while (numeroColumnas<5 && numeroColumnas>12);
-            
-            sala = new Sala(nombreSala,(byte) numeroFilas,(byte) numeroColumnas,(short) valorEntrada);
-            cine.agregarSala(sala);
-   
-        }
-
+        agregarSalaCine(cine);
         return cine;
         
     }
@@ -177,8 +211,95 @@ public class MainCine {
         
         
     }
+    
+    public static Sala salaActual(Cine cine){
+        Scanner reader = new Scanner(System.in);
+        Sala sala ;
+        String nombreSala ;
+        do{
+            System.out.println("Salas disponibles:");
+            
+            for(Sala sal:cine.getSalas()){
+                System.out.println(""+sal.getNombre());  
+            }
+            do{
+                System.out.print("Ingrese nombre de sala: ");
+                nombreSala= reader.nextLine();
+                
+            } while (nombreSala!=null && nombreSala.trim().isEmpty());
+            
+            sala =cine.buscarSalaPorNombre(nombreSala);
+ 
+        } while(sala==null);
+        
+        return sala;
+    }
+        
+    public static void agregarSalaCine(Cine cine){
+        Scanner reader= new Scanner(System.in);
+        String nombreCine= new String();
+        String nombreSala= new String();
+        ArrayList<String> nombresSala= new ArrayList();
+        Sala sala;
+        int numeroSalas;
+        int valorEntrada;
+        int numeroFilas;
+        int numeroColumnas;
+
+        do{
+            System.out.println("Numero de salas actual: "+cine.getSalas().size());
+            System.out.println("El numero maximo de salas que puede tener el cine es 9.");
+            System.out.println("Ingrese numero de salas a agregar al cine:");
+            numeroSalas= Integer.parseInt(reader.nextLine());
+        } while(numeroSalas<=0 || numeroSalas+cine.getSalas().size()>9);
         
         
+        for (int i = 0 ; i< numeroSalas;i++){
+            //Revisar restriccion de nombre en cuanto a mayuscula y minuscula
+            do{
+                System.out.println("Ingrese nombre de sala "+(i+1+cine.getSalas().size()));
+                nombreSala= reader.nextLine();
+
+            }while(nombreSala!=null && nombreSala.trim().isEmpty() || nombresSala.contains(nombreSala));
+        
+            nombresSala.add(nombreSala); 
+            do {
+                System.out.println("Ingrese valor de entrada de sala "+nombreSala);
+                valorEntrada= Integer.parseInt(reader.nextLine());
+            }while(valorEntrada<1000 || valorEntrada >32767);
+            
+            do{
+                System.out.println("Ingrese numero de filas de la sala "+nombreSala);
+                numeroFilas= Integer.parseInt(reader.nextLine());
+            } while(numeroFilas<3 || numeroFilas>15);
+            
+            do{
+                System.out.println("Advertencia: Debido a especificaciones del diseno del programa,");
+                System.out.println("la cantidad de asientos no puede superar 127 (valor maximo de byte),");
+                System.out.println("por lo que dado el numero actual de filas, SE RECOMIENDA como");
+                System.out.print("valor maximo de columnas : ");
+                if (127/numeroFilas>15){
+                    System.out.print("15");
+                }else{
+                    System.out.print((int)(127/numeroFilas));
+                }
+                System.out.println("\nIngrese numero de columnas de la sala "+nombreSala);
+                numeroColumnas=Integer.parseInt(reader.nextLine());
+            }while (numeroColumnas<5 && numeroColumnas>12);
+            
+            sala = new Sala(nombreSala,(byte) numeroFilas,(byte) numeroColumnas,(short) valorEntrada);
+            cine.agregarSala(sala);
+   
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+    }
         
         
         

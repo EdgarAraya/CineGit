@@ -21,7 +21,7 @@ public class MainCine {
         int answer ;
         boolean exit = true;
         Cine cine= new Cine("Sin Nombre");
-        Sala test= new Sala("Test", (byte) 12,(byte)10, (short) 1000);
+        Sala test= new Sala("Test", (byte) 11,(byte)12, (short) 1000);
         Sala salaActual;
         
         System.out.println("El siguiente programa intenta emular un sistema de ventas de un cine.");
@@ -81,7 +81,11 @@ public class MainCine {
                 System.out.println(""+cine.obtenerInformeRecaudacion());
                 break;
             case 6:
+                if (creado){
                 System.out.println(""+cine.mostrarDatos());
+                }else{
+                System.out.println("Error: No existe cine.");
+                }
                 break;
             case 7:
                 if (creado && cine.getSalas().size()<9){
@@ -109,22 +113,7 @@ public class MainCine {
                 
             }
         }
-        
-        
-        
-        
-        
-        
-        /*
-        cine = setupCine();
-        System.out.println("El cine se llama: "+cine.getNombre());
-        
-        
-        System.out.println(""+cine.mostrarDatos());
-        
-        ventas(cine);
-        */
-   
+
     }
     
     public static boolean validaAsiento(Sala s, String a){ //Revisar
@@ -135,22 +124,23 @@ public class MainCine {
         
         Asiento asiento;
         answer= Character.toLowerCase(a.charAt(0));
-        //if (!Character.isDigit(a.charAt(0)) &&)
-        
-        
+
         fila = (int) (answer-'a');
         columna = Integer.parseInt(a.substring(1));
-        
-        //asiento = new Asiento(numAChar(fila).charAt(0),(byte) columna);
-        
-        if (fila < s.getTotalFilas() && columna<s.getTotalColumnas()){
-            return true;
+        if (columna>=127 || Character.isDigit(a.charAt(0))){
+            return false;
         }
         
         
-               
-               
-               return false;
+        char filaC = a.charAt(0);
+        byte columnaB = (byte) Byte.parseByte(a.substring(1));
+        
+        asiento = new Asiento(filaC, columnaB);        
+        if (fila < s.getTotalFilas() && columna<=s.getTotalColumnas() && s.estaDisponible(asiento)){
+            return true;
+        }
+     
+        return false;
   
            
   
@@ -196,9 +186,9 @@ public class MainCine {
             
             do{
                 System.out.println(""+sala.mostrarOcupacion());
-                System.out.println("Ingrese asiento a comprar");
+                System.out.println("Ingrese asiento a comprar:");
                 answer= reader.nextLine();
-                if (!validaAsiento(sala,answer)) System.out.println("No valido");
+                if (!validaAsiento(sala,answer)) System.out.println("Asiento no valido");
                 
             } while (!validaAsiento(sala,answer));
             
@@ -252,13 +242,19 @@ public class MainCine {
         int valorEntrada;
         int numeroFilas;
         int numeroColumnas;
-
+        int limiteSalas = 9;
         do{
             System.out.println("Numero de salas actual: "+cine.getSalas().size());
-            System.out.println("El numero maximo de salas que puede tener el cine es 9.");
+            System.out.println("El numero maximo de salas que puede tener el cine es "+limiteSalas+".");
             System.out.println("Ingrese numero de salas a agregar al cine:");
             numeroSalas= Integer.parseInt(reader.nextLine());
-        } while(numeroSalas<=0 || numeroSalas+cine.getSalas().size()>9);
+            
+            
+            if (numeroSalas+cine.getSalas().size()>limiteSalas ){
+                System.out.println("Error: El numero de salas a agregar excede al limite de salas (maximo"+" "+limiteSalas+")");
+                
+            }
+        } while(numeroSalas<=0 || numeroSalas+cine.getSalas().size()>limiteSalas);
         
         
         for (int i = 0 ; i< numeroSalas;i++){
@@ -271,11 +267,13 @@ public class MainCine {
         
             nombresSala.add(nombreSala); 
             do {
+                System.out.println("Valor minimo: 1000, Valor Maximo: 32767");
                 System.out.println("Ingrese valor de entrada de sala "+nombreSala);
                 valorEntrada= Integer.parseInt(reader.nextLine());
             }while(valorEntrada<1000 || valorEntrada >32767);
             
             do{
+                System.out.println("Minimo de Filas: 3, Maximo de filas: 15");
                 System.out.println("Ingrese numero de filas de la sala "+nombreSala);
                 numeroFilas= Integer.parseInt(reader.nextLine());
             } while(numeroFilas<3 || numeroFilas>15);
@@ -290,6 +288,7 @@ public class MainCine {
                 }else{
                     System.out.print((int)(127/numeroFilas));
                 }
+                System.out.println("Valor minimo de columnas: 5, Valor maximo de columnas: 12");
                 System.out.println("\nIngrese numero de columnas de la sala "+nombreSala);
                 numeroColumnas=Integer.parseInt(reader.nextLine());
             }while (numeroColumnas<5 && numeroColumnas>12);

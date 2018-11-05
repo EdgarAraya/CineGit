@@ -109,6 +109,7 @@ public class Sala {
             }
             matriz = matriz.concat("\n");
         }
+        matriz = matriz.concat("Asientos Ocupados: "+this.obtenerAsientosOcupados().size());
         return matriz;
     }
     

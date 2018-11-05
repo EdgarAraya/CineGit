@@ -21,16 +21,14 @@ public class MainCine {
         int answer ;
         boolean exit = true;
         Cine cine= new Cine("Sin Nombre");
-        Sala test= new Sala("Test", (byte) 11,(byte)12, (short) 1000);
-        Sala salaActual;
+        Sala test= new Sala("Test", (byte) 3,(byte)5, (short) 1000);
+        Sala salaActual= new Sala("Sin Nombre", (byte) 3, (byte) 5 ,(short) 1000);
         
+        
+                
         System.out.println("El siguiente programa intenta emular un sistema de ventas de un cine.");
         
-        
-        
-        
-       
-        
+
         while (exit){
             System.out.println("1.Crear cine");
             System.out.println("2.Vender entradas");
@@ -43,7 +41,6 @@ public class MainCine {
             System.out.println("Seleccione una opcion : ");
             answer = Integer.parseInt(reader.nextLine());
             boolean creado= (cine.getSalas().size()>0);
-           
             switch (answer){
 
             case 1: 
@@ -51,11 +48,11 @@ public class MainCine {
                 break;
             case 2:
                 if (creado){
+                   
                     ventas(cine);
-
                 }
                 else{
-                    System.out.println("Error");
+                    System.out.println("Error: No existe cine");
                 }
                 break;
             case 3:
@@ -90,7 +87,6 @@ public class MainCine {
             case 7:
                 if (creado && cine.getSalas().size()<9){
                     agregarSalaCine(cine);
-                  
                 }else if(!creado ){
                     System.out.println("Error: No existe cine al que agregar salas");
                    
@@ -174,38 +170,45 @@ public class MainCine {
         sala = salaActual(cine);
         Asiento asiento;
         //more work
-        
-        
-        do{
-            System.out.print("Numero de asientos a comprar: ");
-            numeroAsientos= Integer.parseInt(reader.nextLine());
-        
-        } while (numeroAsientos<=0 && sala.obtenerAsientosOcupados().size()+numeroAsientos>127);// agregar mas restricciones de limite superior
-        
-        for (int i=0; i < numeroAsientos; i++){
+        if (!estaLlena(sala)){
             
+        
+        
+        //Review obtener asientos libres , plural singular
             do{
-                System.out.println(""+sala.mostrarOcupacion());
-                System.out.println("Ingrese asiento a comprar:");
-                answer= reader.nextLine();
-                if (!validaAsiento(sala,answer)) System.out.println("Asiento no valido");
-                
-            } while (!validaAsiento(sala,answer));
-            
-            char fila;
-            byte columna;
-            
-            fila = answer.charAt(0);
-            columna = (byte) Byte.parseByte(answer.substring(1));
-            
-            
-            asiento = new Asiento(fila, columna);
-            
-            cine.venderAsiento(sala, asiento);
- 
-        }
-        
-        
+                System.out.println("La sala tiene "+(sala.getTotalColumnas()*sala.getTotalFilas()-sala.obtenerAsientosOcupados().size())+"asientos disponibles");
+                System.out.print("Numero de asientos a comprar: ");
+                numeroAsientos= Integer.parseInt(reader.nextLine());
+
+            } while (numeroAsientos<=0 || sala.obtenerAsientosOcupados().size()+numeroAsientos>sala.getTotalColumnas()*sala.getTotalFilas());// agregar mas restricciones de limite superior
+
+            for (int i=0; i < numeroAsientos; i++){
+
+                do{
+                    System.out.println(""+sala.mostrarOcupacion());
+                    System.out.println("Ingrese asiento a comprar:");
+                    answer= reader.nextLine();
+                    if (!validaAsiento(sala,answer)) System.out.println("Asiento no valido");
+
+                } while (!validaAsiento(sala,answer));
+
+                char fila;
+                byte columna;
+
+                fila = answer.charAt(0);
+                columna = (byte) Byte.parseByte(answer.substring(1));
+
+
+                asiento = new Asiento(fila, columna);
+
+                cine.venderAsiento(sala, asiento);
+
+            }
+
+            }
+            else{
+                System.out.println("La sala esta llena");
+            }
         
     }
     
@@ -263,7 +266,7 @@ public class MainCine {
                 System.out.println("Ingrese nombre de sala "+(1+cine.getSalas().size()));
                 nombreSala= reader.nextLine();
 
-            }while(nombreSala!=null && nombreSala.trim().isEmpty() || nombresSala.contains(nombreSala));
+            }while(nombreSala!=null && nombreSala.trim().isEmpty() || containsIgnoreCase(nombreSala,nombresSala));
         
             nombresSala.add(nombreSala); 
             do {
@@ -304,15 +307,12 @@ public class MainCine {
     public static String salaRangoFilas(Sala sala){
          
         Scanner reader = new Scanner(System.in);
-        
         int filaInicial;
         char inicial;
         String answer = new String();
         int filaFinal;
         char fin;
-        int limiteFinal= sala.getTotalColumnas()+1;
-        
-        
+        int limiteFinal= sala.getTotalFilas()-1;
         do{
             do {
                 
@@ -325,11 +325,11 @@ public class MainCine {
             
             filaInicial= (int) (inicial -'a');
 
-        } while(filaInicial>limiteFinal);
+        } while(filaInicial>limiteFinal);//rev
         
         do{
             do {
-                System.out.println("Sala "+sala.getNombre()+" contiene "+sala.getTotalFilas());
+                System.out.println("Sala "+sala.getNombre()+" contiene "+sala.getTotalFilas()+" filas");
                 System.out.println("Fila inicial: "+Character.toUpperCase(inicial));
                 System.out.println("Es posible mostrar hasta la fila: "+numAChar((int)sala.getTotalFilas()));
                 System.out.println("Ingrese hasta que fila mostrar:");
@@ -351,9 +351,21 @@ public class MainCine {
         return (i > 0 && i < 27) ? String.valueOf((char)(i + 'A' - 1)) : null;
 }
         
+    public static boolean containsIgnoreCase(String s, ArrayList<String> l){
+     for (String string : l){
+        if (string.equalsIgnoreCase(s)){
+            return true;
+         }
+     }
+    return false;
+  }  
+        
+    public static boolean estaLlena(Sala s){
+        
+        return (s.obtenerAsientosOcupados().size()>=s.getTotalColumnas()*s.getTotalFilas());
         
         
-    
+    }
    
     
 }

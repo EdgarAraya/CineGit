@@ -11,4 +11,57 @@ package Cine;
  */
 public class Asiento {
     
+    private char fila;
+    private byte columna;
+    private boolean libre;
+    
+    
+    public Asiento(char fila, byte columna){
+        this.setFila(fila);
+        this.setColumna(columna);
+        this.setLibre(true); //Testing inicializacion vacio
+    }
+    public Asiento(){}
+    
+    
+    public char getFila() {
+        return fila;
+    }
+
+    public void setFila(char fila) {
+        fila=Character.toLowerCase(fila);
+        this.fila = fila;
+    }
+
+    public byte getColumna() {
+        return columna;
+    }
+
+    public void setColumna(byte columna) {
+        this.columna = columna;
+    }
+
+    public boolean isLibre() {
+        return libre;
+    }
+
+    public void setLibre(boolean libre) {
+        this.libre = libre;
+    }
+    
+    public String mostrarDatos(){
+        String datos;
+        datos = new String();
+        
+        datos = datos.concat(""+Character.toUpperCase(this.getFila())+""+this.getColumna());
+        
+        return datos;
+    }
+    
+    
+    
+    
+    
+    
+    
 }

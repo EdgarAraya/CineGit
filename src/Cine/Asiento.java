@@ -30,6 +30,10 @@ public class Asiento {
         this.setColumna(columna);
         this.setLibre(true); //Testing inicializacion vacio
     }
+    
+    /**
+     * Constructor por defecto
+     */
     public Asiento(){}
     
     /**

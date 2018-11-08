@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- *
- * @author Edgar-pc
+ *MainCine.java- Clase principal y de implementacion de las clases que forman el cine
+ * @author Edgar Araya
+ * @version 1.0
  */
 public class MainCine {
 
@@ -112,7 +113,15 @@ public class MainCine {
 
     }
     
-    public static boolean validaAsiento(Sala s, String a){ //Revisar
+    /**
+     * Valida si es posible o no comprar un asiento en la sala designada segun el nombre del asiento en formato letra-numero
+     * @param s Sala en la que se quiere verificar que el asiento existe o esta disponible
+     * @param a String con los datos del asiento
+     * @return Retorna si el asiento existe dentro de la sala y si esta desponible, tipo boolean
+     */
+    
+    
+    public static boolean validaAsiento(Sala s, String a){ 
         Scanner reader= new Scanner(System.in);
         int fila;
         char answer;
@@ -145,6 +154,13 @@ public class MainCine {
         
 }
     
+    /**
+     * Configura un cine y sus salas segun las elecciones del usuario 
+     * @return Retorna un cine con las especificaciones del usuario
+     */
+    
+    
+    
     public static Cine setupCine(){
         Scanner reader= new Scanner(System.in);
         String nombreCine= new String();
@@ -161,7 +177,14 @@ public class MainCine {
         
     }
     
-    public static void ventas(Cine cine){//Work work
+    /**
+     * Maneja las salas del cine y el sistema de ventas para comprar asientos con sus restricciones correspondientes , si una sala esta llena no se pueden comprar asientos
+     * @param cine Cine en el que se venderar asientos 
+     */
+    
+    
+    
+    public static void ventas(Cine cine){
         Scanner reader= new Scanner(System.in);
         String nombreSala = new String();
         String answer= new String();
@@ -169,12 +192,12 @@ public class MainCine {
         Sala sala;
         sala = salaActual(cine);
         Asiento asiento;
-        //more work
+        
         if (!estaLlena(sala)){
             
         
         
-        //Review obtener asientos libres , plural singular
+        
             do{
                 System.out.println("La sala tiene "+(sala.getTotalColumnas()*sala.getTotalFilas()-sala.obtenerAsientosOcupados().size())+" asientos disponibles");
                 System.out.print("Numero de asientos a comprar: ");
@@ -212,6 +235,12 @@ public class MainCine {
         
     }
     
+    /**
+     * Muestra al usuario las salas disponibles al usuario y controla el ingreso del nombre de la sala para verificar que existe una sala con ese nombre
+     * @param cine Cine que contiene las salas a elegir
+     * @return Retorna la sala elegida por el usuario
+     */
+    
     public static Sala salaActual(Cine cine){
         Scanner reader = new Scanner(System.in);
         Sala sala ;
@@ -235,6 +264,11 @@ public class MainCine {
         return sala;
     }
         
+    
+    /**
+     * Configura el ingreso de salas al cine segun la especificaciones del usuario, cada sala con su numero de filas y columnas validadas y el costo del asiento- El numero maximo de salas es 9
+     * @param cine Cine en el que se quieren agregar salas
+     */
     public static void agregarSalaCine(Cine cine){
         Scanner reader= new Scanner(System.in);
         String nombreCine= new String();
@@ -261,7 +295,6 @@ public class MainCine {
         
         
         for (int i = 0 ; i< numeroSalas;i++){
-            //Revisar restriccion de nombre en cuanto a mayuscula y minuscula
             do{
                 System.out.println("Ingrese nombre de sala "+(1+cine.getSalas().size()));
                 nombreSala= reader.nextLine();
@@ -304,6 +337,14 @@ public class MainCine {
          
     }
         
+    /**
+     * Controla y valida el ingreso de filas a mostrar ingresado por el usuario
+     * @param sala Sala en la que se quiere mostrar un rango de filas
+     * @return String con la ocupacion del cine segun el rango ingresado
+     */
+    
+    
+    
     public static String salaRangoFilas(Sala sala){
          
         Scanner reader = new Scanner(System.in);
@@ -325,7 +366,7 @@ public class MainCine {
             
             filaInicial= (int) (inicial -'a');
 
-        } while(filaInicial>limiteFinal);//rev
+        } while(filaInicial>limiteFinal);
         
         do{
             do {
@@ -346,11 +387,23 @@ public class MainCine {
      }   
         
         
-        
+       /**
+        * Convierte un numero a su caracter correspondiente , siendo A = 0
+        * @param i Numero a transformar a un caracter
+        * @return Caracter al cual fue convertido el numero, null en caso de que el int ingresado este fuera del rango
+        */ 
      public static String numAChar(int i) {
         return (i > 0 && i < 27) ? String.valueOf((char)(i + 'A' - 1)) : null;
 }
         
+     
+     /**
+      * Analiza una lista y verifica si un string pertenece o no a la lista, ignorando las mayusculas y minusculas
+      * @param s String a buscar en el ArrayList de String
+      * @param l ArrayList de String que se quiere analizar
+      * @return Retorna true en caso de que el string se encuentre en el ArrayList, caso contrario false
+      */
+     
     public static boolean containsIgnoreCase(String s, ArrayList<String> l){
      for (String string : l){
         if (string.equalsIgnoreCase(s)){
@@ -360,6 +413,12 @@ public class MainCine {
     return false;
   }  
         
+    
+    /**
+     * Comprueba si la sala tiene todos los asientos vendidos o no
+     * @param s Sala a validar
+     * @return True en caso de que la sala tiene todos sus asientos vendidos, false en caso contrario
+     */
     public static boolean estaLlena(Sala s){
         
         return (s.obtenerAsientosOcupados().size()>=s.getTotalColumnas()*s.getTotalFilas());

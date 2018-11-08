@@ -6,14 +6,23 @@
 package Cine;
 
 /**
- *
- * @author Edgar-pc
+ *Asiento.java - Metodos y atributos que controlan un asiento del cine
+ * @author Edgar Araya
+ * @version 1.0
  */
 public class Asiento {
     
     private char fila;
     private byte columna;
     private boolean libre;
+    
+    
+    
+    /**
+     * Constructor que inicializa en asiento con los argumentos ingresados, se inicializa libre por defecto
+     * @param fila Letra de la fila del asiento
+     * @param columna Numero de columna del asiento en byte
+     */
     
     
     public Asiento(char fila, byte columna){
@@ -23,31 +32,65 @@ public class Asiento {
     }
     public Asiento(){}
     
+    /**
+     * Obtiene la fila del asiento
+     * @return Retorna la fila del asiento de tipo char
+     */
+    
+    
+    
     
     public char getFila() {
         return fila;
     }
 
+    /**
+     * Cambia la fila del asiento
+     * @param fila fila a cambiar de tipo char
+     */
     public void setFila(char fila) {
         fila=Character.toLowerCase(fila);
         this.fila = fila;
     }
 
+    
+    /**
+     * Obtiene la columna del asiento
+     * @return Retorna la columna del asiento en tipo byte
+     */
     public byte getColumna() {
         return columna;
     }
 
+    /**
+     * Cambia la columna del asiento
+     * @param columna columna a cambiar de tipo byte
+     */
+    
     public void setColumna(byte columna) {
         this.columna = columna;
     }
 
+    
+    /**
+     * Obtiene el estado del asiento
+     * @return Si el asiento esta libre o no, tipo boolean
+     */
     public boolean isLibre() {
         return libre;
     }
-
+/**
+ * Cambia la ocupacion del asiento
+ * @param libre Estado a utilizar en el asiento de tipo boolean
+ */
     public void setLibre(boolean libre) {
         this.libre = libre;
     }
+    
+    /**
+     * Obtiene cadena de caracteres con los datos del asiento
+     * @return String con datos del asiento
+     */
     
     public String mostrarDatos(){
         String datos;

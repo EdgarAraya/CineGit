@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *Sala.Java - Contiene los atributos y metodos de una sala del cine
- * @author Edgar-pc
+ * @author Edgar Araya
  * @version 1.0
  * 
  * 

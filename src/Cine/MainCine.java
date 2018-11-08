@@ -176,7 +176,7 @@ public class MainCine {
         
         //Review obtener asientos libres , plural singular
             do{
-                System.out.println("La sala tiene "+(sala.getTotalColumnas()*sala.getTotalFilas()-sala.obtenerAsientosOcupados().size())+"asientos disponibles");
+                System.out.println("La sala tiene "+(sala.getTotalColumnas()*sala.getTotalFilas()-sala.obtenerAsientosOcupados().size())+" asientos disponibles");
                 System.out.print("Numero de asientos a comprar: ");
                 numeroAsientos= Integer.parseInt(reader.nextLine());
 

@@ -286,15 +286,15 @@ public class MainCine {
                 System.out.println("la cantidad de asientos no puede superar 127 (valor maximo de byte),");
                 System.out.println("por lo que dado el numero actual de filas, SE RECOMIENDA como");
                 System.out.print("valor maximo de columnas : ");
-                if (127/numeroFilas>15){
-                    System.out.print("15");
+                if (127/numeroFilas>12){
+                    System.out.print("12");
                 }else{
                     System.out.print((int)(127/numeroFilas));
                 }
-                System.out.println("Valor minimo de columnas: 5, Valor maximo de columnas: 12");
+                System.out.println("\nValor minimo de columnas: 5, Valor maximo de columnas: 12");
                 System.out.println("\nIngrese numero de columnas de la sala "+nombreSala);
                 numeroColumnas=Integer.parseInt(reader.nextLine());
-            }while (numeroColumnas<5 && numeroColumnas>12);
+            }while (numeroColumnas<5 || numeroColumnas>12);
             
             sala = new Sala(nombreSala,(byte) numeroFilas,(byte) numeroColumnas,(short) valorEntrada);
             cine.agregarSala(sala);

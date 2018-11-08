@@ -25,7 +25,6 @@ public class Sala {
         this.totalFilas= totalFilas;
         this.totalColumnas = totalColumnas;
         this.valorEntrada = valorEntrada;
-        this.nombreFilas = new ArrayList();
         this.asientos = new Asiento[totalFilas][totalColumnas];
         
         

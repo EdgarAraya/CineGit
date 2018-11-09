@@ -10,6 +10,7 @@ import java.util.ArrayList;
 /**
  * Cine.java - Atributos y metodos que controlan un cine
  * @author Edgar Araya
+ * @author Luis Benitez
  * @version 1.0
  */
 public class Cine {

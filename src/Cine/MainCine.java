@@ -11,6 +11,7 @@ import java.util.Scanner;
 /**
  *MainCine.java- Clase principal y de implementacion de las clases que forman el cine
  * @author Edgar Araya
+ * @author Luis Benitez
  * @version 1.0
  */
 public class MainCine {
@@ -28,7 +29,7 @@ public class MainCine {
         
                 
         System.out.println("El siguiente programa intenta emular un sistema de ventas de un cine.");
-        
+        System.out.println("El limite de salas es 9.");
 
         while (exit){
             System.out.println("1.Crear cine");
@@ -109,8 +110,6 @@ public class MainCine {
                 break;
             default:
                 System.out.println("Opcion invalida");
-                break;
-                
             }
         }
 
@@ -138,8 +137,7 @@ public class MainCine {
         if (columna>=127 || Character.isDigit(a.charAt(0))){
             return false;
         }
-        
-        
+ 
         char filaC = a.charAt(0);
         byte columnaB = (byte) Byte.parseByte(a.substring(1));
         
@@ -148,13 +146,7 @@ public class MainCine {
             return true;
         }
      
-        return false;
-  
-           
-  
-       
-        
-        
+        return false;    
 }
     
     /**
@@ -197,10 +189,7 @@ public class MainCine {
         Asiento asiento;
         
         if (!estaLlena(sala)){
-            
-        
-        
-        
+ 
             do{
                 System.out.println("La sala tiene "+(sala.getTotalColumnas()*sala.getTotalFilas()-sala.obtenerAsientosOcupados().size())+" asientos disponibles");
                 System.out.print("Numero de asientos a comprar: ");
@@ -231,10 +220,10 @@ public class MainCine {
 
             }
 
-            }
-            else{
-                System.out.println("La sala esta llena");
-            }
+        }
+        else{
+             System.out.println("La sala esta llena");
+        }
         
     }
     

@@ -8,6 +8,7 @@ package Cine;
 /**
  *Asiento.java - Metodos y atributos que controlan un asiento del cine
  * @author Edgar Araya
+ * @author Luis Benitez
  * @version 1.0
  */
 public class Asiento {
@@ -26,9 +27,9 @@ public class Asiento {
     
     
     public Asiento(char fila, byte columna){
-        this.setFila(fila);
-        this.setColumna(columna);
-        this.setLibre(true); //Testing inicializacion vacio
+        this.fila= fila;
+        this.columna=columna;
+        this.libre= true;
     }
     
     /**

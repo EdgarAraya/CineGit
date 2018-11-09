@@ -45,6 +45,9 @@ public class MainCine {
             switch (answer){
 
             case 1: 
+                if(creado){
+                        System.out.println("Se sobreescribira el cine actual: "+cine.getNombre());
+                }
                 cine = setupCine();
                 break;
             case 2:
